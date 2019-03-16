@@ -30,18 +30,16 @@ def Gradient_V(Oracle, x0):
     time_start = process_time()
 
     x = x0
-
-    ##### Boucle sur les iterations
-
     alpha_n = 1
 
+
+    ##### Boucle sur les iterations
     for k in range(iter_max):
 
         # Valeur du critere et du gradient
         critere, gradient = Oracle(x, 4)
         gradient_norm = norm(gradient)
-        if gradient_norm <= threshold:
-            break
+        
         # Direction de descente
         D = -gradient
         delta_k=1*(critere+4)
@@ -60,6 +58,7 @@ def Gradient_V(Oracle, x0):
         gradient_step_list.append(alpha_n)
         critere_list.append(critere)
 
+        # Condition d'arret
         if abs(alpha_n-alpha_p)*norm(D) <= threshold:
             break
 
