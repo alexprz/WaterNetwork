@@ -47,9 +47,9 @@ def Polak_Ribiere(Oracle, x0):
 
         alpha_p = alpha_n
         alpha_n, ok = Wolfe(alpha_0, x, D, Oracle, check_direction=False)
-
-        print("alpha", alpha_n)
-        print("ok", ok)
+        #
+        # print("alpha", alpha_n)
+        # print("ok", ok)
 
         # Mise a jour des variables
         x = x + alpha_n*D
@@ -74,6 +74,7 @@ def Polak_Ribiere(Oracle, x0):
     time_cpu = process_time() - time_start
 
     print()
+    print('Polak Ribiere')
     print('Iteration :', k)
     print('Temps CPU :', time_cpu)
     print('Critere optimal :', critere_opt)
