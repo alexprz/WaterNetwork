@@ -33,8 +33,8 @@ from OraclePG import OraclePG, OraclePH
 from Gradient_F import Gradient_F
 from Optim_Numpy import Optim_Numpy
 from Newton_F import Newton_F
-qc = np.zeros(n-md)
-qc[0] = 1
+x0 = 0.1 * np.zeros(n-md)
+# qc[0] = 1
 # print(OraclePG(qc, 2))
 # Gradient_F(lambda x:OraclePG(x, 4), qc)
 # print(Optim_Numpy(lambda x:OraclePG(x, 4), qc))
@@ -43,9 +43,9 @@ qc[0] = 1
 #
 #      Exemple 2 - le gradient a pas variable :
 #
-                 # from OraclePG import OraclePG
-                 # from Gradient_V import Gradient_V
-                 # from Wolfe import Wolfe
+# from OraclePG import OraclePG
+# from Gradient_V import Gradient_V
+# from Wolfe import Wolfe
 #
 # ---> A modifier...
 # ---> A modifier...
@@ -54,7 +54,7 @@ from OraclePG import OraclePG
 from Gradient_V import Gradient_V
 from Wolfe_Skel import Wolfe
 
-Gradient_V(OraclePG, qc)
+Gradient_V(OraclePG, x0)
 
 ##### Initialisation de l'algorithme
 

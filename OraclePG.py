@@ -26,7 +26,7 @@ def OraclePH(qc, ind):
     if ind == 3:
         return OraclePG(qc, 3)
     if ind == 4:
-        return OraclePg(qc, 4)
+        return OraclePG(qc, 4)
 
 
     H = np.zeros((n-md, n-md))
@@ -47,5 +47,6 @@ def OraclePH(qc, ind):
         F, G = OraclePG(qc, 4)
         return F, G, H
 
-qc = np.zeros(n-md)
-print(OraclePH(qc, 7))
+if __name__=='__main__':
+    qc = np.zeros(n-md)
+    print(OraclePH(qc, 7))

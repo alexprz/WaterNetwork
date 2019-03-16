@@ -36,14 +36,12 @@ def Wolfe(alpha, x, D, Oracle):
     alpha_max = np.inf
 
     ok = 0
-    dltx = 0.00000001
+    dltx = 0.000001
 
     ##### Algorithme de Fletcher-Lemarechal
 
     # Appel de l'oracle au point initial
-    argout = Oracle(x, 4)
-    critere = argout[0]
-    gradient = argout[1]
+    critere, gradient = Oracle(x, 4)
 
     # Initialisation de l'algorithme
     alpha_n = alpha
@@ -58,35 +56,22 @@ def Wolfe(alpha, x, D, Oracle):
         xn = x + alpha_n*D
 
         # Calcul des conditions de Wolfe
-        #
-        # ---> A completer...
-        # ---> A completer...
-        if Oracle(xn, 2) > Oracle(x, 2) + omega_1*alpha_n*dot(Oracle(xp, 3).T, D):
+        critere_n, gradient_n = Oracle(xn, 4)
+        condition1 = (critere_n<=critere+omega_1*alpha_n*np.vdot(gradient,D))
+        condition2 = (np.vdot(gradient_n,D)>=omega_2*np.vdot(gradient,D))
+    
+        if not condition1:
             alpha_max = alpha_n
-            alpha_n = (alpha_min + alpha_max)/2.
-
-        elif dot(Oracle(xn, 3).T, D) < omega_2*dot(Oracle(xp, 3).T, D):
-            alpha_min = alpha
+            alpha_n = 0.5*(alpha_min+alpha_max)
+        elif not condition2:
+            alpha_min=alpha_n
             if alpha_max == np.inf:
-                alpha_n = 2*alpha_min
+                alpha_n=2*alpha_min
             else:
-                alpha_n = (alpha_min + alpha_max)/2.
-
+                alpha_n=0.5*(alpha_min+alpha_max)
         else:
             ok = 1
 
-        # Test des conditions de Wolfe
-        # - si les deux conditions de Wolfe sont verifiees,
-        #   faire ok = 1 : on sort alors de la boucle while
-        # - sinon, modifier la valeur de alphan : on reboucle.
-        #
-        # ---> A completer...
-        # ---> A completer...
-
-        # Test d'indistinguabilite
-        print("xn, xp = {}, {}".format(xn, xp))
-        print("alpha_n = {}".format(alpha_n))
         if np.linalg.norm(xn - xp) < dltx:
             ok = 2
-
     return alpha_n, ok
