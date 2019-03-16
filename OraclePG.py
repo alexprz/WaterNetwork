@@ -40,8 +40,8 @@ def OraclePH(qc, ind):
         return H
 
     if ind == 6:
-        F, G = OraclePG(qc, 3)
-        return F, G, H
+        G = OraclePG(qc, 3)
+        return G, H
 
     if ind == 7:
         F, G = OraclePG(qc, 4)
