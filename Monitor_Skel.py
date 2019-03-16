@@ -53,9 +53,10 @@ x0 = 0.1 * np.zeros(n-md)
 from OraclePG import OraclePG
 from Gradient_V import Gradient_V
 from Gradient_PR import Gradient_PR
+from Gradient_BFGS import Gradient_BFGS
 from Wolfe_Skel import Wolfe
 
-Gradient_PR(OraclePG, x0)
+Gradient_BFGS(OraclePG, x0)
 
 ##### Initialisation de l'algorithme
 
