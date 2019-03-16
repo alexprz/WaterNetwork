@@ -9,14 +9,16 @@ from Wolfe_Skel import Wolfe
 #                                                                           #
 #         RESOLUTION D'UN PROBLEME D'OPTIMISATION SANS CONTRAINTES          #
 #                                                                           #
-#         Methode du gradient a pas variable                                #
+#         Methode de Polak-Ribiere                                          #
 #                                                                           #
 #############################################################################
 
 from Visualg import Visualg
 
+def Beta(gradient_n, gradient_p):
+    return np.dot(gradient_n.T, gradient_n - gradient_p)/norm(gradient_p)**2
 
-def Gradient_BFGS(Oracle, x0):
+def Gradient_PR(Oracle, x0):
 
     ##### Initialisation des variables
 
@@ -31,8 +33,6 @@ def Gradient_BFGS(Oracle, x0):
     time_start = process_time()
 
     x = x0
-    Id = np.eye(len(x))
-    W_p = Id
 
     ##### Boucle sur les iterations
 
@@ -52,7 +52,6 @@ def Gradient_BFGS(Oracle, x0):
         print("ok", ok)
 
         # Mise a jour des variables
-        x_p = x
         x = x + alpha_n*D
 
         gradient_p = gradient_n
@@ -60,15 +59,8 @@ def Gradient_BFGS(Oracle, x0):
 
         if abs(alpha_n-alpha_p)*norm(D) <= threshold:
             break
-        delta_x = x - x_p
-        delta_g = gradient_n - gradient_p
 
-        Matrice1 = (Id - np.dot(delta_x, delta_g.T))/(np.dot(delta_g.T, delta_x))
-        Matrice2 = (Id - np.dot(delta_g, delta_x.T))/(np.dot(delta_g.T, delta_x))
-        Matrice3 = np.dot(delta_x, delta_x.T)/np.dot(delta_g.T, delta_x)
-
-        W_n = np.dot(Matrice1, np.dot(W_p, Matrice2)) + Matrice3
-        D = -np.dot(W_n, gradient_n)
+        D = -gradient_n + Beta(gradient_n, gradient_p)*D
 
         # Evolution du gradient, du pas, et du critere
         gradient_norm_list.append(norm(D))

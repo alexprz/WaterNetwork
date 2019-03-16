@@ -15,10 +15,7 @@ from Wolfe_Skel import Wolfe
 
 from Visualg import Visualg
 
-def Beta(gradient_n, gradient_p):
-    return np.dot(gradient_n.T, gradient_n - gradient_p)/norm(gradient_p)**2
-
-def Gradient_PR(Oracle, x0):
+def Gradient_Newton(Oracle, x0):
 
     ##### Initialisation des variables
 

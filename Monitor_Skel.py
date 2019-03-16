@@ -52,10 +52,11 @@ x0 = 0.1 * np.zeros(n-md)
 # ---> A modifier...
 from OraclePG import OraclePG, OraclePH
 from Gradient_V import Gradient_V
-from Gradient_PR import Gradient_PR
-from Gradient_BFGS import Gradient_BFGS
+from Polak_Ribiere import Polak_Ribiere
+from BFGS import BFGS
 from Gradient_Newton import Gradient_Newton
 from Wolfe_Skel import Wolfe
+from Newton import Newton 
 
 Gradient_Newton(OraclePH, x0)
 
