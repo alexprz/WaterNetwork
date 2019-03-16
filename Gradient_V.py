@@ -54,7 +54,7 @@ def Gradient_V(Oracle, x0):
         x = x + alpha_n*D
 
         # Evolution du gradient, du pas, et du critere
-        gradient_norm_list.append(norm(D))
+        gradient_norm_list.append(gradient_norm)
         gradient_step_list.append(alpha_n)
         critere_list.append(critere)
 

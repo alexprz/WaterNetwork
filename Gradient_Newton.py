@@ -46,7 +46,7 @@ def Newton(Oracle, x0):
         delta_k=1*(critere+4)
         alpha_0=-2*delta_k/np.vdot(gradient, D)
         alpha_p = alpha_n
-        alpha_n, ok = Wolfe(alpha_0, x, D, Oracle)
+        alpha_n, ok = Wolfe(alpha_0, x, D, Oracle, False)
 
         print("alpha", alpha_n)
         print("ok", ok)
@@ -55,7 +55,7 @@ def Newton(Oracle, x0):
         x = x + alpha_n*D
 
         # Evolution du gradient, du pas, et du critere
-        gradient_norm_list.append(norm(D))
+        gradient_norm_list.append(gradient_norm)
         gradient_step_list.append(alpha_n)
         critere_list.append(critere)
 

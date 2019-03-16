@@ -31,8 +31,8 @@ def BFGS(Oracle, x0):
     time_start = process_time()
 
     x = x0
-    Id = 0.01*np.eye(len(x))
-    W_p = Id
+    Id = np.eye(len(x))
+    W_p = 0.001*Id
 
     ##### Boucle sur les iterations
 
@@ -71,7 +71,7 @@ def BFGS(Oracle, x0):
         D = -np.dot(W_n, gradient_n)
 
         # Evolution du gradient, du pas, et du critere
-        gradient_norm_list.append(norm(D))
+        gradient_norm_list.append(norm(gradient_n))
         gradient_step_list.append(alpha_n)
         critere_list.append(critere_n)
 

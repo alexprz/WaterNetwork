@@ -63,7 +63,7 @@ def Polak_Ribiere(Oracle, x0):
         D = -gradient_n + Beta(gradient_n, gradient_p)*D
 
         # Evolution du gradient, du pas, et du critere
-        gradient_norm_list.append(norm(D))
+        gradient_norm_list.append(norm(gradient_n))
         gradient_step_list.append(alpha_n)
         critere_list.append(critere_n)
 
