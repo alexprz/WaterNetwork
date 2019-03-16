@@ -15,7 +15,7 @@ from Wolfe_Skel import Wolfe
 
 from Visualg import Visualg
 
-def Gradient_Newton(Oracle, x0):
+def Newton(Oracle, x0):
 
     ##### Initialisation des variables
 

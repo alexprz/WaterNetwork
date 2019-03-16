@@ -57,7 +57,7 @@ from BFGS import BFGS
 from Wolfe_Skel import Wolfe
 from Newton import Newton 
 
-Gradient_BFGS(OraclePG, x0)
+Gradient_V(OraclePG, x0)
 
 ##### Initialisation de l'algorithme
 
