@@ -33,7 +33,7 @@ from OraclePG import OraclePG, OraclePH
 from Gradient_F import Gradient_F
 from Optim_Numpy import Optim_Numpy
 from Newton_F import Newton_F
-x0 = 0.1 * np.zeros(n-md)
+x0 = 0.1 * np.random.normal(size=n-md)
 # qc[0] = 1
 # print(OraclePG(qc, 2))
 # Gradient_F(lambda x:OraclePG(x, 4), qc)

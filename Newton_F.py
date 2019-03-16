@@ -22,7 +22,7 @@ def Newton_F(Oracle, x0):
     
     iter_max = 100
     gradient_step = 1
-    threshold = 0.000001
+    threshold = 0.00001
     
     gradient_norm_list = []
     gradient_step_list = []
