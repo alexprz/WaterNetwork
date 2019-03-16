@@ -1,7 +1,7 @@
 from Probleme_R import *
 from Structures_N import *
 
-def OraclePG(qc, ind):
+def OraclePG(qc, ind=4):
     q0Bqc = q0 + dot(B, qc)
 
     F, G = 0, 0

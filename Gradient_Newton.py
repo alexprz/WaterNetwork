@@ -16,7 +16,7 @@ from Wolfe_Skel import Wolfe
 
 from Visualg import Visualg
 
-def Gradient_Newton(Oracle, x0):
+def Newton(Oracle, x0):
 
     ##### Initialisation des variables
 
@@ -42,9 +42,9 @@ def Gradient_Newton(Oracle, x0):
         gradient_norm = norm(gradient)
 
         # Direction de descente
-        D = np.dot(-inv(np.dot(hess, hess)), gradient)
+        D = np.dot(-inv(hess), gradient)
         delta_k=1*(critere+4)
-        alpha_0=-2*delta_k/(np.vdot(gradient, D))
+        alpha_0=-2*delta_k/np.vdot(gradient, D)
         alpha_p = alpha_n
         alpha_n, ok = Wolfe(alpha_0, x, D, Oracle)
 
@@ -60,6 +60,7 @@ def Gradient_Newton(Oracle, x0):
         critere_list.append(critere)
 
         # Condition d'arret
+        # if gradient_norm<=threshold:
         if abs(alpha_n-alpha_p)*norm(D) <= threshold:
             break
 

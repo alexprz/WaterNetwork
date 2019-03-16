@@ -31,7 +31,7 @@ def BFGS(Oracle, x0):
     time_start = process_time()
 
     x = x0
-    Id = np.eye(len(x))
+    Id = 0.01*np.eye(len(x))
     W_p = Id
 
     ##### Boucle sur les iterations
@@ -63,7 +63,7 @@ def BFGS(Oracle, x0):
         delta_x = x - x_p
         delta_g = gradient_n - gradient_p
 
-        Matrice1 = (Id - np.dot(delta_x, delta_g.T))/(np.dot(delta_g.T, delta_x))
+        Matrice1 = (Id - np.dot(delta_x, delta_g.T))/np.dot(delta_g.T, delta_x)
         Matrice2 = (Id - np.dot(delta_g, delta_x.T))/(np.dot(delta_g.T, delta_x))
         Matrice3 = np.dot(delta_x, delta_x.T)/np.dot(delta_g.T, delta_x)
 

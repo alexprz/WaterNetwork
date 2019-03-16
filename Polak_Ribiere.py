@@ -46,7 +46,7 @@ def Polak_Ribiere(Oracle, x0):
         alpha_0=-2*delta_k/(np.vdot(gradient_n, D))
 
         alpha_p = alpha_n
-        alpha_n, ok = Wolfe(alpha_0, x, D, Oracle)
+        alpha_n, ok = Wolfe(alpha_0, x, D, Oracle, check_direction=False)
 
         print("alpha", alpha_n)
         print("ok", ok)

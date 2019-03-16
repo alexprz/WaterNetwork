@@ -54,11 +54,10 @@ from OraclePG import OraclePG, OraclePH
 from Gradient_V import Gradient_V
 from Polak_Ribiere import Polak_Ribiere
 from BFGS import BFGS
-from Gradient_Newton import Gradient_Newton
+from Gradient_Newton import Newton
 from Wolfe_Skel import Wolfe
-from Newton import Newton 
 
-Gradient_Newton(OraclePH, x0)
+BFGS(OraclePG, x0)
 
 ##### Initialisation de l'algorithme
 
