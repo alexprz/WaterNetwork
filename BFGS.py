@@ -16,7 +16,7 @@ from Wolfe_Skel import Wolfe
 from Visualg import Visualg
 
 
-def Gradient_BFGS(Oracle, x0):
+def BFGS(Oracle, x0):
 
     ##### Initialisation des variables
 

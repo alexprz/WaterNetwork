@@ -25,7 +25,7 @@ from numpy import dot
 #             = 1 : conditions de Wolfe verifiees
 #             = 2 : indistinguabilite des iteres
 
-def Wolfe(alpha, x, D, Oracle):
+def Wolfe(alpha, x, D, Oracle, check_direction=True):
 
     ##### Coefficients de la recherche lineaire
 
@@ -42,6 +42,9 @@ def Wolfe(alpha, x, D, Oracle):
 
     # Appel de l'oracle au point initial
     critere, gradient = Oracle(x, 4)
+    scalar_product = np.vdot(gradient, D)
+    if check_direction:
+        assert scalar_product<0
 
     # Initialisation de l'algorithme
     alpha_n = alpha
