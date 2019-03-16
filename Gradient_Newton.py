@@ -48,8 +48,8 @@ def Newton(Oracle, x0):
         alpha_p = alpha_n
         alpha_n, ok = Wolfe(alpha_0, x, D, Oracle, False)
 
-        print("alpha", alpha_n)
-        print("ok", ok)
+        # print("alpha", alpha_n)
+        # print("ok", ok)
 
         # Mise a jour des variables
         x = x + alpha_n*D
@@ -70,6 +70,7 @@ def Newton(Oracle, x0):
     time_cpu = process_time() - time_start
 
     print()
+    print('Newton')
     print('Iteration :', k)
     print('Temps CPU :', time_cpu)
     print('Critere optimal :', critere_opt)

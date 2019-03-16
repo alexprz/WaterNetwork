@@ -39,16 +39,16 @@ def Gradient_V(Oracle, x0):
         # Valeur du critere et du gradient
         critere, gradient = Oracle(x, 4)
         gradient_norm = norm(gradient)
-        
+
         # Direction de descente
         D = -gradient
         delta_k=1*(critere+4)
         alpha_0=-2*delta_k/(np.vdot(gradient, D))
         alpha_p = alpha_n
         alpha_n, ok = Wolfe(alpha_0, x, D, Oracle)
-        
-        print("alpha", alpha_n)
-        print("ok", ok)
+
+        # print("alpha", alpha_n)
+        # print("ok", ok)
 
         # Mise a jour des variables
         x = x + alpha_n*D
@@ -68,6 +68,7 @@ def Gradient_V(Oracle, x0):
     time_cpu = process_time() - time_start
 
     print()
+    print('Pas variable')
     print('Iteration :', k)
     print('Temps CPU :', time_cpu)
     print('Critere optimal :', critere_opt)
