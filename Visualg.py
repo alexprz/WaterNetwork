@@ -23,15 +23,16 @@ import matplotlib.pyplot as plt
 
 def Visualg(gradient_list, step_list, critere_list):
 
-    # plt.subplot(2, 1, 1)
+    plt.subplot(2, 1, 1)
     plt.gca().set_title("Norme du gradient au cours des iterations")
     plt.gca().set_yscale('log')
     plt.plot(gradient_list, label="Norme du gradient")
 
-    # plt.subplot(2, 1, 2)
-    # plt.gca().set_title("Pas de gradient au cours des iterations")
-    # plt.gca().set_yscale('log')
-    # plt.plot(step_list, label="Longueur du pas")
+    plt.subplot(2, 1, 2)
+    plt.gca().set_title("Pas de gradient au cours des iterations")
+    plt.gca().set_yscale('log')
+    plt.plot(step_list, label="Longueur du pas")
 
+    plt.tight_layout()
     # plt.tight_layout(rect=(0, 0, 1, 2))
     plt.show()
