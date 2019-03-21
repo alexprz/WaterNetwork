@@ -31,8 +31,8 @@ def BFGS(Oracle, x0):
     time_start = process_time()
 
     x = x0
-    Id = np.eye(len(x))
-    W_p = 0.001*Id
+    Id = np.identity(len(x))
+    W = Id
 
     ##### Boucle sur les iterations
 
@@ -42,14 +42,8 @@ def BFGS(Oracle, x0):
 
     for k in range(iter_max):
 
-        delta_k=1*(critere_n+4)
-        alpha_0=-2*delta_k/(np.vdot(gradient_n, D))
-
         alpha_p = alpha_n
-        alpha_n, ok = Wolfe(alpha_0, x, D, Oracle)
-
-        # print("alpha", alpha_n)
-        # print("ok", ok)
+        alpha_n, ok = Wolfe(1, x, D, Oracle)
 
         # Mise a jour des variables
         x_p = x
@@ -57,23 +51,26 @@ def BFGS(Oracle, x0):
 
         gradient_p = gradient_n
         critere_n, gradient_n = Oracle(x, 4)
-
-        if abs(alpha_n-alpha_p)*norm(D) <= threshold:
+        if norm(gradient_n) <= threshold:
             break
-        delta_x = x - x_p
-        delta_g = gradient_n - gradient_p
 
-        Matrice1 = (Id - np.dot(delta_x, delta_g.T))/np.dot(delta_g.T, delta_x)
-        Matrice2 = (Id - np.dot(delta_g, delta_x.T))/np.dot(delta_g.T, delta_x)
-        Matrice3 = np.dot(delta_x, delta_x.T)/np.dot(delta_g.T, delta_x)
 
-        W_n = np.dot(Matrice1, np.dot(W_p, Matrice2)) + Matrice3
-        D = -np.dot(W_n, gradient_n)
+        delta_x = np.reshape(x-x_p, (len(x),1))
+        delta_g = np.reshape(gradient_n-gradient_p, (len(x),1))
+        denominateur = np.vdot(delta_g,delta_x)
+
+        mat1 = Id - np.dot(delta_x,delta_g.T)/denominateur
+        mat2 = Id - np.dot(delta_g,delta_x.T)/denominateur
+        mat3 = np.dot(delta_x,delta_x.T)/denominateur
+
+        W = np.dot(mat1, np.dot(W, mat2)) + mat3
+        D = -np.dot(W, gradient_n)
 
         # Evolution du gradient, du pas, et du critere
         gradient_norm_list.append(norm(gradient_n))
         gradient_step_list.append(alpha_n)
         critere_list.append(critere_n)
+        
 
 
     critere_opt = critere_n

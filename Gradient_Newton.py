@@ -46,7 +46,7 @@ def Newton(Oracle, x0):
         delta_k=1*(critere+4)
         alpha_0=-2*delta_k/np.vdot(gradient, D)
         alpha_p = alpha_n
-        alpha_n, ok = Wolfe(alpha_0, x, D, Oracle, False)
+        alpha_n, ok = Wolfe(1, x, D, Oracle, False)
 
         # print("alpha", alpha_n)
         # print("ok", ok)
@@ -61,7 +61,7 @@ def Newton(Oracle, x0):
 
         # Condition d'arret
         # if gradient_norm<=threshold:
-        if abs(alpha_n-alpha_p)*norm(D) <= threshold:
+        if gradient_norm <= threshold:
             break
 
     critere_opt = critere

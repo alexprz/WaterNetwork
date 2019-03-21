@@ -16,7 +16,7 @@ from Wolfe_Skel import Wolfe
 from Visualg import Visualg
 
 def Beta(gradient_n, gradient_p):
-    return np.dot(gradient_n.T, gradient_n - gradient_p)/norm(gradient_p)**2
+    return (np.vdot(gradient_n, gradient_n) - np.vdot(gradient_n, gradient_p))/(norm(gradient_p)**2)
 
 def Polak_Ribiere(Oracle, x0):
 
@@ -42,7 +42,7 @@ def Polak_Ribiere(Oracle, x0):
 
     for k in range(iter_max):
 
-        delta_k=1*(critere_n+4)
+        delta_k=0.01*(critere_n+4)
         alpha_0=-2*delta_k/(np.vdot(gradient_n, D))
 
         alpha_p = alpha_n
@@ -57,7 +57,7 @@ def Polak_Ribiere(Oracle, x0):
         gradient_p = gradient_n
         critere_n, gradient_n = Oracle(x, 4)
 
-        if abs(alpha_n-alpha_p)*norm(D) <= threshold:
+        if np.linalg.norm(gradient_n) <= threshold:
             break
 
         D = -gradient_n + Beta(gradient_n, gradient_p)*D
