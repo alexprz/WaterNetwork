@@ -1,51 +1,52 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 22 17:43:17 2019
-
-@author: quentin
-"""
-import numpy as np
-from Structures_N import *
 from Probleme_R import *
+from Structures_N import *
+
+def OraclePG(qc, ind=4):
+    q0Bqc = q0 + dot(B, qc)
+
+    F, G = 0, 0
+
+    if ind == 2 or ind==4:
+        F = 1/3.*np.vdot(q0Bqc, r * q0Bqc * np.absolute(q0Bqc)) + np.vdot(pr, dot(Ar, (q0Bqc)))
+    if ind == 3 or ind==4:
+        G = np.dot(B.T, r*q0Bqc*np.absolute(q0Bqc) + dot(Ar.T, pr))
+
+    if ind == 2:
+        return F
+    if ind == 3:
+        return G
+    if ind == 4:
+        return F, G
+
+def OraclePH(qc, ind):
+    q0Bqc = q0 + dot(B, qc)
+
+    if ind == 2:
+        return OraclePG(qc, 2)
+    if ind == 3:
+        return OraclePG(qc, 3)
+    if ind == 4:
+        return OraclePG(qc, 4)
 
 
-def F(qc):
-    x1 = q0 + np.dot(B,qc)
-    x2 = r*x1*np.abs(x1)
-    res = 1/3*(np.dot(x1,x2)) + np.dot(pr,np.dot(Ar,x1))
-    return res
+    H = np.zeros((n-md, n-md))
 
-def G(qc):
-    x = q0+np.dot(B,qc)
-    res = np.dot(np.transpose(np.dot(Ar,B)),pr) + np.dot(np.transpose(B),r*np.abs(x)*x)
-    return res
+    for i in range(n-md):
+        for j in range(n-md):
+            for k in range(n):
+                H[i,j] += 2*B[k,i]*r[k]*np.absolute(q0Bqc)[k]*B[k,j]
 
-def H(qc):
-    res = 2*np.dot(np.transpose(B),np.dot(np.diag(r*np.abs(q0+np.dot(B,qc))),B))
-    return res
+    if ind == 5:
+        return H
 
-def OraclePG(qc,ind=4):
-    if ind==2:
-        return F(qc)
-    if ind==3:
-        return G(qc)
-    if ind==4:
-        return F(qc),G(qc)
-    return
+    if ind == 6:
+        G = OraclePG(qc, 3)
+        return G, H
 
+    if ind == 7:
+        F, G = OraclePG(qc, 4)
+        return F, G, H
 
-def OraclePH(qc,ind=7):
-    if ind==2:
-        return F(qc)
-    if ind==3:
-        return G(qc)
-    if ind==4:
-        return F(qc),G(qc)
-    if ind==5:
-        return H(qc)
-    if ind==6:
-        return G(qc),H(qc)
-    if ind==7:
-        return F(qc),G(qc),H(qc)
-    return
+if __name__=='__main__':
+    qc = np.zeros(n-md)
+    print(OraclePH(qc, 7))
