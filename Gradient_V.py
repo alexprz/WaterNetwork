@@ -20,7 +20,6 @@ def Gradient_V(Oracle, x0):
     ##### Initialisation des variables
 
     iter_max = 10000
-    gradient_step = 0.0005
     threshold = 0.000001
 
     gradient_norm_list = []
@@ -28,9 +27,7 @@ def Gradient_V(Oracle, x0):
     critere_list = []
 
     time_start = process_time()
-
     x_n = x0
-    alpha_n = 1
 
 
     ##### Boucle sur les iterations
@@ -43,13 +40,9 @@ def Gradient_V(Oracle, x0):
 
         # Direction de descente
         D = -gradient
-        delta_k=1*(critere+4)
-        alpha_0=-2*delta_k/(np.vdot(gradient, D))
-        alpha_p = alpha_n
+        delta_k = 1*(critere+4)
+        alpha_0 = -2*delta_k/np.vdot(gradient, D)
         alpha_n, ok = Wolfe(alpha_0, x_n, D, Oracle)
-
-        # print("alpha", alpha_n)
-        # print("ok", ok)
 
         # Mise a jour des variables
         x_n = x_p + alpha_n*D
@@ -60,7 +53,7 @@ def Gradient_V(Oracle, x0):
         critere_list.append(critere)
 
         # Condition d'arret
-        if np.linalg.norm(gradient) <= threshold:
+        if gradient_norm <= threshold:
             break
 
     critere_opt = critere

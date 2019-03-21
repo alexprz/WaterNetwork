@@ -29,14 +29,14 @@ def Wolfe(alpha, x, D, Oracle, check_direction=True):
 
     ##### Coefficients de la recherche lineaire
 
-    omega_1 = 0.1
-    omega_2 = 0.9
+    omega_1 = 0.45
+    omega_2 = 0.6
 
     alpha_min = 0
     alpha_max = np.inf
 
     ok = 0
-    dltx = 0.000001
+    dltx = 0.000000001
 
     ##### Algorithme de Fletcher-Lemarechal
 
@@ -78,5 +78,6 @@ def Wolfe(alpha, x, D, Oracle, check_direction=True):
         if np.linalg.norm(xn - xp) < dltx:
             ok = 2
     return alpha_n, ok
+
 
 

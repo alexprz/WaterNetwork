@@ -59,7 +59,7 @@ from Wolfe_Skel import Wolfe
 
 # Gradient_F(OraclePG, x0)
 Gradient_V(OraclePG, x0)
-# Polak_Ribiere(OraclePG, x0)
+Polak_Ribiere(OraclePG, x0)
 BFGS(OraclePG, x0)
 Newton(OraclePH, x0)
 
