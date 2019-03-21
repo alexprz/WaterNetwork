@@ -18,7 +18,6 @@ from Visualg import Visualg
 def Beta(gradient_n, gradient_p):
     gradient_n = np.reshape(gradient_n, (len(gradient_n),1))
     gradient_p = np.reshape(gradient_p, (len(gradient_p),1))
-    print((np.dot(gradient_n.T, gradient_n) - np.dot(gradient_n.T, gradient_p))/(norm(gradient_p)**2))
     return (np.dot(gradient_n.T, gradient_n) - np.dot(gradient_n.T, gradient_p))[0][0]/(norm(gradient_p)**2)
 
 def Polak_Ribiere(Oracle, x0):
