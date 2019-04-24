@@ -40,11 +40,13 @@ def OracleDH(lbd, ind):
 
     H = np.zeros((md, n))
     x = np.dot(Ar.T, pr) + np.dot(Ad.T, lbd)
+    print(x)
 
     for i in range(md):
         for j in range(n):
             H[i, j] = Ad[i, j]/(2*np.sqrt(r[j]*abs(x[j])))
 
+    H = np.dot(H, Ad.T)
     if ind == 5:
         return H
 
@@ -57,5 +59,6 @@ def OracleDH(lbd, ind):
         return F, G, H
 
 if __name__=='__main__':
-    lbd = np.zeros(md)
+    lbd = 100 + np.random.normal(size=md)
+    # print(OracleDH(lbd, 7))
     print(OracleDH(lbd, 7))

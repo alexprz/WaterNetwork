@@ -34,6 +34,7 @@ from Gradient_F import Gradient_F
 from Optim_Numpy import Optim_Numpy
 from Newton_F import Newton_F
 x0 = 0.1 * np.random.normal(size=n-md)
+lbd0 = 0.1 * np.random.normal(size=md)
 # qc[0] = 1
 # print(OraclePG(qc, 2))
 # Gradient_F(lambda x:OraclePG(x, 4), qc)
@@ -51,17 +52,19 @@ x0 = 0.1 * np.random.normal(size=n-md)
 # ---> A modifier...
 # ---> A modifier...
 from OraclePG import OraclePG, OraclePH
+from OracleD import OracleDG, OracleDH
 from Gradient_V import Gradient_V
 from Polak_Ribiere import Polak_Ribiere
 from BFGS import BFGS
 from Gradient_Newton import Newton
 from Wolfe_Skel import Wolfe
 
-Gradient_F(OraclePG, x0)
-Gradient_V(OraclePG, x0)
-Polak_Ribiere(OraclePG, x0)
-BFGS(OraclePG, x0)
+Gradient_F(OracleDG, x0)
+Gradient_V(OracleDG, x0)
+Polak_Ribiere(OracleDG, x0)
+BFGS(OracleDG, x0)
 Newton(OraclePH, x0)
+Newton(OracleDH, lbd0)
 
 ##### Initialisation de l'algorithme
 
