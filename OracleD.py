@@ -12,14 +12,14 @@ def OracleDG(lbd, ind=4):
 
     for i in range(n):
         y = x[i]/r[i]
-        q_hash[i] = np.sqrt(abs(y))*np.sign(y)
+        q_hash[i] = -np.sqrt(abs(y))*np.sign(y)
 
     F, G = 0, 0
 
     if ind == 2 or ind==4:
-        F = J(q_hash) + np.vdot(lbd, np.dot(Ad, q_hash) - fd)
+        F = -(J(q_hash) + np.vdot(lbd, np.dot(Ad, q_hash) - fd))
     if ind == 3 or ind==4:
-        G = np.dot(Ad, q_hash) - fd
+        G = -(np.dot(Ad, q_hash) - fd)
 
     if ind == 2:
         return F
@@ -44,7 +44,11 @@ def OracleDH(lbd, ind):
 
     for i in range(md):
         for j in range(n):
-            H[i, j] = Ad[i, j]/(2*np.sqrt(r[j]*abs(x[j])))
+            # print(j)
+            assert(x[j]!=0)
+            H[i, j] = -Ad[i, j]/(2*np.sqrt(r[j]*abs(x[j])))
+
+    H = np.dot(H, Ad.T)
 
     H = np.dot(H, Ad.T)
     if ind == 5:
@@ -59,6 +63,6 @@ def OracleDH(lbd, ind):
         return F, G, H
 
 if __name__=='__main__':
-    lbd = 100 + np.random.normal(size=md)
-    # print(OracleDH(lbd, 7))
+    lbd = np.random.randn(md)
+    # print(OracleDG(lbd, 4))
     print(OracleDH(lbd, 7))
