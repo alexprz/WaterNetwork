@@ -70,7 +70,7 @@ def BFGS(Oracle, x0):
         gradient_norm_list.append(norm(gradient_n))
         gradient_step_list.append(alpha_n)
         critere_list.append(critere_n)
-        
+
 
 
     critere_opt = critere_n

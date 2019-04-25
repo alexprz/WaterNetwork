@@ -48,7 +48,7 @@ def OracleDH(lbd, ind):
             H[i, j] = Ad[i, j]/(2*np.sqrt(r[j]*abs(x[j])))
 
     H = np.dot(H, Ad.T)
-    
+
     if ind == 5:
         return H
 
