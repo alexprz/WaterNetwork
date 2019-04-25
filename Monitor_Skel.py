@@ -65,10 +65,10 @@ from Wolfe_Skel import Wolfe
 # Polak_Ribiere(OraclePG, x0)
 # BFGS(OraclePG, x0)
 # Newton(OraclePH, x0)
-Gradient_F(OracleDG, lbd0)
-Gradient_V(OracleDG, lbd0)
-Polak_Ribiere(OracleDG, lbd0)
-BFGS(OracleDG, lbd0)
+# Gradient_F(OracleDG, lbd0)
+# Gradient_V(OracleDG, lbd0)
+# Polak_Ribiere(OracleDG, lbd0)
+# BFGS(OracleDG, lbd0)
 Newton(OracleDH, lbd0)
 
 ##### Initialisation de l'algorithme

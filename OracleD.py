@@ -40,17 +40,15 @@ def OracleDH(lbd, ind):
 
     H = np.zeros((md, n))
     x = np.dot(Ar.T, pr) + np.dot(Ad.T, lbd)
-    print(x)
 
     for i in range(md):
         for j in range(n):
             # print(j)
             assert(x[j]!=0)
-            H[i, j] = -Ad[i, j]/(2*np.sqrt(r[j]*abs(x[j])))
+            H[i, j] = Ad[i, j]/(2*np.sqrt(r[j]*abs(x[j])))
 
     H = np.dot(H, Ad.T)
-
-    H = np.dot(H, Ad.T)
+    
     if ind == 5:
         return H
 
