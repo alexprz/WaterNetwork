@@ -41,7 +41,7 @@ def Gradient_V(Oracle, x0):
         # Direction de descente
         D = -gradient
         delta_k = 1*(critere+4)
-        alpha_0 = 1#-2*delta_k/np.vdot(gradient, D)
+        alpha_0 = 3#1#-2*delta_k/np.vdot(gradient, D)
         alpha_n, ok = Wolfe(alpha_0, x_n, D, Oracle)
 
         # Mise a jour des variables

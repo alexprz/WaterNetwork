@@ -43,7 +43,7 @@ def BFGS(Oracle, x0):
     for k in range(iter_max):
 
         alpha_p = alpha_n
-        alpha_n, ok = Wolfe(1, x, D, Oracle)
+        alpha_n, ok = Wolfe(8, x, D, Oracle)
 
         # Mise a jour des variables
         x_p = x

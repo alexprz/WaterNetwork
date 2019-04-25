@@ -19,8 +19,8 @@ def Gradient_F(Oracle, x0):
     ##### Initialisation des variables
 
     iter_max = 10000
-    gradient_step = 0.0005
-    threshold = 0.000001
+    gradient_step = 0.63 #0.00005
+    threshold = 0.00001
 
     gradient_norm_list = []
     gradient_step_list = []
