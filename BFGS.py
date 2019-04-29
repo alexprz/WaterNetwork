@@ -16,7 +16,7 @@ from Wolfe_Skel import Wolfe
 from Visualg import Visualg
 
 
-def BFGS(Oracle, x0):
+def BFGS(Oracle, x0, dual=False):
 
     ##### Initialisation des variables
 
@@ -42,8 +42,13 @@ def BFGS(Oracle, x0):
 
     for k in range(iter_max):
 
+        if dual:
+            alpha_0 = 8
+        else:
+            alpha_0 = 1
+
         alpha_p = alpha_n
-        alpha_n, ok = Wolfe(8, x, D, Oracle)
+        alpha_n, ok = Wolfe(alpha_0, x, D, Oracle)
 
         # Mise a jour des variables
         x_p = x

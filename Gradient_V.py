@@ -15,7 +15,7 @@ from Wolfe_Skel import Wolfe
 
 from Visualg import Visualg
 
-def Gradient_V(Oracle, x0):
+def Gradient_V(Oracle, x0, dual=True):
 
     ##### Initialisation des variables
 
@@ -41,7 +41,12 @@ def Gradient_V(Oracle, x0):
         # Direction de descente
         D = -gradient
         delta_k = 1*(critere+4)
-        alpha_0 = 3#1#-2*delta_k/np.vdot(gradient, D)
+
+        if dual:
+            alpha_0 = 3#1#-2*delta_k/np.vdot(gradient, D)
+        else:
+            alpha_0 = 1
+
         alpha_n, ok = Wolfe(alpha_0, x_n, D, Oracle)
 
         # Mise a jour des variables

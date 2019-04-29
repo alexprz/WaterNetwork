@@ -39,10 +39,10 @@ BFGS(OraclePG, x0)
 copt, gopt, xopt = Newton(OraclePH, x0)
 
 # Dual
-Gradient_F(OracleDG, lbd0)
-Gradient_V(OracleDG, lbd0)
-Polak_Ribiere(OracleDG, lbd0)
-BFGS(OracleDG, lbd0)
+Gradient_F(OracleDG, lbd0, dual=True)
+Gradient_V(OracleDG, lbd0, dual=True)
+Polak_Ribiere(OracleDG, lbd0, dual=True)
+BFGS(OracleDG, lbd0, dual=True)
 copt_dual, gopt_dual, xopt_dual = Newton(OracleDH, lbd0)
 
 # Scipy optimizationation

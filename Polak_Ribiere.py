@@ -20,7 +20,7 @@ def Beta(gradient_n, gradient_p):
     gradient_p = np.reshape(gradient_p, (len(gradient_p),1))
     return (np.dot(gradient_n.T, gradient_n) - np.dot(gradient_n.T, gradient_p))[0][0]/(norm(gradient_p)**2)
 
-def Polak_Ribiere(Oracle, x0):
+def Polak_Ribiere(Oracle, x0, dual=False):
 
     ##### Initialisation des variables
 
@@ -44,8 +44,10 @@ def Polak_Ribiere(Oracle, x0):
     for k in range(iter_max):
 
         delta_k=0.001*(critere_n+4)
-        alpha_0=7#1#-2*delta_k/(np.vdot(gradient_n, D))
-
+        if dual:
+            alpha_0 = 7 #1#-2*delta_k/(np.vdot(gradient_n, D))
+        else:
+            alpha_0 = 1
         alpha_p = alpha_n
         alpha_n, ok = Wolfe(alpha_0, x, D, Oracle, check_direction=False)
         #

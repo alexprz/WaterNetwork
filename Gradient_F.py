@@ -14,12 +14,16 @@ from time import process_time
 
 from Visualg import Visualg
 
-def Gradient_F(Oracle, x0):
+def Gradient_F(Oracle, x0, dual=False):
 
     ##### Initialisation des variables
 
     iter_max = 10000
-    gradient_step = 0.63 #0.00005
+    if dual:
+        gradient_step = 0.63
+    else:
+        gradient_step = 0.0005
+
     threshold = 0.00001
 
     gradient_norm_list = []
