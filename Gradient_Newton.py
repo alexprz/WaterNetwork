@@ -43,10 +43,9 @@ def Newton(Oracle, x0):
 
         # Direction de descente
         D = np.dot(-inv(hess), gradient)
-        delta_k=1*(critere+4)
-        alpha_0=-2*delta_k/np.vdot(gradient, D)
-        alpha_p = alpha_n
-        alpha_n, ok = Wolfe(1, x, D, Oracle, False)
+
+        alpha_0 = 1
+        alpha_n, ok = Wolfe(alpha_0, x, D, Oracle, False)
 
         # print("alpha", alpha_n)
         # print("ok", ok)

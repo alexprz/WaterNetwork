@@ -43,7 +43,6 @@ def OracleDH(lbd, ind):
 
     for i in range(md):
         for j in range(n):
-            # print(j)
             assert(x[j]!=0)
             H[i, j] = Ad[i, j]/(2*np.sqrt(r[j]*abs(x[j])))
 
