@@ -21,6 +21,7 @@ from OracleD import OracleDG, OracleDH
 
 # Méthodes d'optimisation
 from Gradient_F import Gradient_F
+from Newton_F import Newton_F
 from Gradient_V import Gradient_V
 from Polak_Ribiere import Polak_Ribiere
 from BFGS import BFGS
@@ -33,6 +34,7 @@ lbd0 = 100 + np.random.normal(size=md)
 
 # Primal
 Gradient_F(OraclePG, x0)
+Newton_F(OraclePH, x0)
 Gradient_V(OraclePG, x0)
 Polak_Ribiere(OraclePG, x0)
 BFGS(OraclePG, x0)

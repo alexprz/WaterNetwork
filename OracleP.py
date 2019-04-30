@@ -18,7 +18,7 @@ def OraclePG(qc, ind=4):
     if ind == 4:
         return F, G
 
-def OraclePH(qc, ind):
+def OraclePH(qc, ind=7):
     q0Bqc = q0 + dot(B, qc)
 
     if ind == 2:
